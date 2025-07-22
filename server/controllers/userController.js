@@ -68,15 +68,30 @@ const registerUser = async(req,res)=> {
  res.json({ success: false, message:error.message })
   }
 }
-const userCredits=async(req,res)=>{
-    try {
-       const {userId}=req.body
-const user=await userModel.findById(userId)
-res.json({success:true,credits:user.creditBalance,user:{name:user.name}}) 
-    } catch (error) {
-      console.log(error.message)
- res.json({ success: false, message:error.message })  
+const userCredits = async (req, res) => {
+  try {
+    // ✅ Pull the ID from req.userId (set by your middleware)
+    const userId = req.userId;
+    console.log("🔍 fetching credits for userId =", userId);
+
+    const user = await userModel.findById(userId);
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
     }
 
-}
+    return res.json({
+      success: true,
+      credits: user.creditBalance,
+      user:    { name: user.name },
+    });
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(500)
+      .json({ success: false, message: error.message });
+  }
+};
+
 export {registerUser,loginUser,userCredits}

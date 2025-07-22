@@ -3,10 +3,10 @@ import { motion } from "motion/react"
 import { assets } from '../assets/assets'
 import { useContext } from 'react'
 import { AppContext } from '../context/AppContext'
-import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 const Header = () => {
   const {User,setShowLogin}=useContext(AppContext)
-  const {navigate}=useNavigate()
+  const navigate=useNavigate()
   const onClickHandler=()=>{
   if(User){
 navigate('/result')
