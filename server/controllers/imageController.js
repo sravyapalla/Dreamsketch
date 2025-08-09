@@ -1,3 +1,4 @@
+// server/controllers/imageController.js
 import axios from "axios";
 import FormData from "form-data";
 import userModel from "../models/userModel.js";
@@ -6,7 +7,7 @@ function buildPrompt(prompt, styleSuffix) {
   return `${prompt || ""}${styleSuffix || ""}`.trim();
 }
 
-// Map "1024x1024" to Stability aspect ratios
+// Map "1024x1024" etc. to Stability aspect ratios
 function sizeToAspect(size = "1024x1024") {
   const s = (size || "").toLowerCase();
   if (s === "1024x1024" || s === "512x512" || s === "256x256") return "1:1";
@@ -21,10 +22,10 @@ export const generateImage = async (req, res) => {
   try {
     const {
       prompt,
-      provider = "stability",          // now default to Stability AI
+      provider = "stability", // "stability" | "clipdrop"
       styleSuffix = "",
       size = "1024x1024",
-      n = 1,                            // (ignored by Stability; we generate 1)
+      n = 1, // (ignored by stability; we generate 1)
     } = req.body;
 
     const userId = req.userId;
@@ -45,9 +46,8 @@ export const generateImage = async (req, res) => {
       formData.append("prompt", finalPrompt);
       formData.append("mode", "text-to-image");
       formData.append("output_format", "png");
-      formData.append("aspect_ratio", sizeToAspect(size)); // Stability expects aspect_ratio
+      formData.append("aspect_ratio", sizeToAspect(size));
 
-      // Endpoint: v2beta stable-image "core" generator
       const resp = await axios.post(
         "https://api.stability.ai/v2beta/stable-image/generate/core",
         formData,
