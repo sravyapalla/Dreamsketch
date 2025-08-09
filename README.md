@@ -14,7 +14,6 @@ Built with **React, Tailwind CSS, Node.js, Express, and REST APIs**, it’s fast
 [![Watch Demo](https://img.shields.io/badge/▶%20Watch%20Demo-blue?style=for-the-badge)](https://drive.google.com/file/d/1_Mrj4KmmK6U1-ciRNykCFqpCWJhz28Wz/view?usp=drive_link)
  
 
-You can also [download the demo video](demo/demo.mp4) and play it locally.
 
 ---
 
