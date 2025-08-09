@@ -3,15 +3,18 @@ import { assets } from '../assets/assets'
 import { motion } from "motion/react"
 import { AppContext } from '../context/AppContext'
 import { useNavigate } from 'react-router-dom'
-const Generate = () => {
-   const {User,setShowLogin}=useContext(AppContext)
-  const navigate=useNavigate()
-  const onClickHandler=()=>{
-  if(User){
-navigate('/result')
-  }else{
-    setShowLogin(true)
-  }
+const Generate = ({ provider = 'openai', styleSuffix = '' }) => {
+  const { User, setShowLogin } = useContext(AppContext)
+  const navigate = useNavigate()
+
+  const onClickHandler = () => {
+    if (User) {
+      navigate('/result', {
+        state: { provider, styleSuffix }
+      })
+    } else {
+      setShowLogin(true)
+    }
   }
   return (
     <motion.div className='pb-16 text-center'
