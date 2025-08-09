@@ -6,7 +6,7 @@ Built with **React, Tailwind CSS, Node.js, Express, and REST APIs**, it’s fast
 ---
 
 ## 🚀 Live Demo  
-🔗 **[View Live Site](https://your-live-site-link.com)**  
+🔗 **[View Live Site](https://dreamsketch-1.onrender.com/)**  
 
 📽 **Demo Video (Click to Play)**  
 ## 📽 Demo Video
